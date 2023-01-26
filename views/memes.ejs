@@ -5,8 +5,9 @@
   <title>Portfolio</title>
   <!-- BM Chaneg the path to the css files -->
   <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../stylesheets/memes.css">
   <link href="../../stylesheets/navbar.css" rel="stylesheet">
-
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 </head>
 
 <body class="position-relative" data-bs-spy="scroll">
@@ -16,23 +17,20 @@
         <thead>
           <tr>
             <th scope="col">ID</th>
-            <th scope="col">Size</th>
             <th scope="col">Image</th>
             <th scope="col">Options</th>
+            <th scope="col"><input id="search-input" type="text"></th>
+            <th scope="col"><button id="search-btn">Search</button></th>
           </tr>
         </thead>
-        <tbody>
-
-          <tr>
-            <th scope="row">
-            </th>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-          </tr>
+        <tbody id="meme-body">
+            <% memesData.data.memes.forEach(function(meme){ %>
+                <tr>
+                    <td id="meme-name"><%= meme.name %></td>
+                    <td><img class="meme-img" src="<%= meme.url %>" alt="<%= meme.name %>" title="<%= meme.name %>"/></td>
+                    <td><a href="/meme?id=<%=meme.id %>" class="btn btn-primary" onclick="selectMeme(event)">See more</a></td>
+                </tr>
+            <% }); %>
         </tbody>
       </table>
     </section>

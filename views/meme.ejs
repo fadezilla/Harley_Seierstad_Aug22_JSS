@@ -5,17 +5,17 @@
   <title>Meme Info</title>
   <link rel="stylesheet" href="../css/bootstrap.min.css" />
   <link href="../stylesheets/navbar.css" rel="stylesheet">
-  <link rel="stylesheet" href="../stylesheets/meme.css">
+  <link rel="stylesheet" href="../stylesheets/memes.css">
 </head>
 
 <body class="position-relative" data-bs-spy="scroll">
   <%- include('./partials/navbar.ejs') %>
     <section class="container">
-
-
-      </div>
-
-
+    <h1><%= selectedMeme.name %></h1>
+    <img src="<%= selectedMeme.url %>"/>
+    <p><%= selectedMeme.url %></p>
+    <p>ID: <%= selectedMeme.id %></p>
+    <p>Dimensions: <%= selectedMeme.width %>x<%= selectedMeme.height %></p>
     </section>
 
     <%- include('./partials/scripts.ejs') %>
