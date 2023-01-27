@@ -8,3 +8,6 @@
 .selected {
     background-color: #7b7b7b;
 }
+.hide {
+    display: none;
+  }

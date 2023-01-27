@@ -5,17 +5,6 @@ const path = require("path")
 var passport = require('passport')
 var LocalStrategy = require('passport-local');
 
-passport.serializeUser(function(user, cb) {
-  process.nextTick(function() {
-    cb(null, { id: user.id, username: user.username });
-  });
-});
-
-passport.deserializeUser(function(user, cb) {
-  process.nextTick(function() {
-    return cb(null, user);
-  });
-});
 
 passport.use(new LocalStrategy(function verify(username, password, cb) {
   let usersArray = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../data/users.json")));
@@ -31,8 +20,22 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
   }
 }));
 
+passport.serializeUser(function(user, cb) {
+  process.nextTick(function() {
+    cb(null, { id: user.id, username: user.username });
+  });
+});
+
+passport.deserializeUser(function(user, cb) {
+  process.nextTick(function() {
+    return cb(null, user);
+  });
+});
+
+
+
 router.post('/password', passport.authenticate('local', {
-  successReturnToOrRedirect: '/',
+  successReturnToOrRedirect: '/memes',
   failureRedirect: '/login'
 }));
 

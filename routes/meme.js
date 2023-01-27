@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 const env = require('../data/env.json');
 const axios = require('axios');
 //const { resolve } = require('path');
 
-router.get('/', (req, res) => {
+
+router.get('/', ensureLoggedIn, (req, res) => {
     const id = req.query.id;
     axios.get(`${env.memesApiEndpoint}`)
     .then(response => {

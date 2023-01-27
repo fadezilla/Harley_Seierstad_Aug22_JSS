@@ -24,13 +24,17 @@
           </tr>
         </thead>
         <tbody id="meme-body">
-            <% memesData.data.memes.forEach(function(meme){ %>
-                <tr>
-                    <td id="meme-name"><%= meme.name %></td>
-                    <td><img class="meme-img" src="<%= meme.url %>" alt="<%= meme.name %>" title="<%= meme.name %>"/></td>
-                    <td><a href="/meme?id=<%=meme.id %>" class="btn btn-primary" onclick="selectMeme(event)">See more</a></td>
-                </tr>
-            <% }); %>
+          <% memesData.data.memes.forEach(function(meme){ %>
+            <tr id="meme-row">
+                <td id="meme-name"><%= meme.name %></td>
+                <td><img class="meme-img" src="<%= meme.url %>" alt="<%= meme.name %>" title="<%= meme.name %>"/></td>
+                <% if (req.isAuthenticated()) { %>
+                  <td>
+                    <a href="/meme?id=<%=meme.id %>" class="btn btn-primary" onclick="selectMeme(event)">See more</a>
+                  </td>
+                <% } %>
+            </tr>
+        <% }); %>
         </tbody>
       </table>
     </section>

@@ -9,6 +9,7 @@
     "axios": "^1.2.2",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.3",
+    "connect-ensure-login": "^0.1.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "^3.1.8",
@@ -20,6 +21,7 @@
     "morgan": "~1.9.1",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "socket.io": "^4.5.4"
   }
 }

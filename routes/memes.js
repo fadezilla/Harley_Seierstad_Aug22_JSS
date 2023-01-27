@@ -11,13 +11,13 @@ router.get('/', (req, res) => {
         axios.get(`${env.memesApiEndpoint}`)
         .then(response => {
             memesData = response.data;
-            res.render('memes', { memesData });
+            res.render('memes', { memesData, req });
         })
         .catch(error => {
             console.log(error);
         });
     } else {
-        res.render('memes', { memesData });
+        res.render('memes', { memesData, req });
     }
 });
 
