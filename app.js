@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var memeRouter = require('./routes/meme');
 var memesRouter = require('./routes/memes');
+var updateRouter = require('./routes/updateRowColor');
 // var highlightsRouter = require('./routes/highlights');
 
 var app = express();
@@ -18,6 +19,16 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+function checkAuth(req, res, next) {
+  if (req.session.user) {
+    res.locals.loggedIn = true;
+  } else {
+    res.locals.loggedIn = false;
+  }
+  next();
+}
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -34,10 +45,13 @@ app.use(session({
   store: new JsonStore()
 }));
 app.use(passport.authenticate('session'));
+app.use(checkAuth);
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/meme', memeRouter);
 app.use('/memes', memesRouter);
+app.use('/', updateRouter);
+
 
 
 // app.use('/highlights', highlightsRouter);

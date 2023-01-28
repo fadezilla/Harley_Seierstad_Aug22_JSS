@@ -1,11 +1,11 @@
 .meme-img {
-    display: inline-block;
     width: 20%;
     height: 20%;
-    text-align: center;
-    align-content: center;
 }
 .selected {
+    background-color: #7b7b7b;
+}
+.selected-row {
     background-color: #7b7b7b;
 }
 .hide {

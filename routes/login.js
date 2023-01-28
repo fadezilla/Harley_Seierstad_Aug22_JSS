@@ -8,7 +8,7 @@ var LocalStrategy = require('passport-local');
 
 passport.use(new LocalStrategy(function verify(username, password, cb) {
   let usersArray = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../data/users.json")));
-  let filteredArray = usersArray.filter(x => x.username = username);
+  let filteredArray = usersArray.filter(x => x.username == username);
   if (filteredArray.length > 0) {
     let usersData = filteredArray[0];
     if (usersData.password == password) {
@@ -48,10 +48,10 @@ router.post('/logout', function(req, res, next) {
 
 router.get('/', function(req, res, next) {
   if(!req.user) {
-    res.render('login', {user: null});
+    res.render('login', {req, user: null});
   }
   else {
-    res.render('login', {user: req.user});
+    res.render('login', {req, user: req.user});
   }
 });
 

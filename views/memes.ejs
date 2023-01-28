@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../stylesheets/memes.css">
   <link href="../../stylesheets/navbar.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="tablerowColour.js"></script>
+  <script src="../public/js/tablerowColour.js"></script>
 </head>
 
 <body class="position-relative" data-bs-spy="scroll">
@@ -16,22 +18,21 @@
       <table class="table" id="table">
         <thead>
           <tr>
-            <th scope="col">ID</th>
+            <th scope="col">Meme Name</th>
             <th scope="col">Image</th>
-            <th scope="col">Options</th>
             <th scope="col"><input id="search-input" type="text"></th>
             <th scope="col"><button id="search-btn">Search</button></th>
           </tr>
         </thead>
         <tbody id="meme-body">
           <% memesData.data.memes.forEach(function(meme){ %>
-            <tr id="meme-row">
+            <tr id="<%= meme.id %>">
                 <td id="meme-name"><%= meme.name %></td>
                 <td><img class="meme-img" src="<%= meme.url %>" alt="<%= meme.name %>" title="<%= meme.name %>"/></td>
                 <% if (req.isAuthenticated()) { %>
                   <td>
-                    <a href="/meme?id=<%=meme.id %>" class="btn btn-primary" onclick="selectMeme(event)">See more</a>
-                  </td>
+                    <a href="/meme?id=<%=meme.id %>" class="btn btn-primary" id="detailsButton" onclick="color(this)">Details</a>
+                </td>
                 <% } %>
             </tr>
         <% }); %>
@@ -39,6 +40,7 @@
       </table>
     </section>
     <%- include('./partials/scripts.ejs') %>
+    <script src="../public/js/tablerowColour.js"></script>
 </body>
 
 </html>

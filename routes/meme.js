@@ -12,10 +12,11 @@ router.get('/', ensureLoggedIn, (req, res) => {
     .then(response => {
         const memes = response.data.data.memes;
         const selectedMeme = memes.find(meme => meme.id === id);
-        if (!selectedMeme) {
+        if (!selectedMeme || !req.user) {
+            user = null;
             return res.status(404).send("Meme not found");
         }
-        res.render('meme', { selectedMeme });
+        res.render('meme', { selectedMeme, user: req.user});
     })
     .catch(error => {
         console.log(error);
