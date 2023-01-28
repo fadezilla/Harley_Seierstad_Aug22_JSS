@@ -2,12 +2,6 @@
     width: 20%;
     height: 20%;
 }
-.selected {
-    background-color: #7b7b7b;
-}
-.selected-row {
-    background-color: #7b7b7b;
-}
 .hide {
     display: none;
   }
