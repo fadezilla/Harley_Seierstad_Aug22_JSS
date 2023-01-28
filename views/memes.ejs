@@ -3,13 +3,10 @@
 
 <head>
   <title>Portfolio</title>
-  <!-- BM Chaneg the path to the css files -->
   <link rel="stylesheet" href="../../css/bootstrap.min.css" />
   <link rel="stylesheet" href="../stylesheets/memes.css">
   <link href="../../stylesheets/navbar.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-  <script src="tablerowColour.js"></script>
-  <script src="../public/js/tablerowColour.js"></script>
 </head>
 
 <body class="position-relative" data-bs-spy="scroll">
@@ -26,12 +23,21 @@
         </thead>
         <tbody id="meme-body">
           <% memesData.data.memes.forEach(function(meme){ %>
-            <tr id="<%= meme.id %>">
+            <tr id="meme-<%= meme.id %>">
                 <td id="meme-name"><%= meme.name %></td>
                 <td><img class="meme-img" src="<%= meme.url %>" alt="<%= meme.name %>" title="<%= meme.name %>"/></td>
                 <% if (req.isAuthenticated()) { %>
                   <td>
-                    <a href="/meme?id=<%=meme.id %>" class="btn btn-primary" id="detailsButton" onclick="color(this)">Details</a>
+                    <td>
+                      <form action="/meme" method="post">
+                        <button href="/meme?id=<%=meme.id %>" class="btn btn-primary" id="detailsButton" onclick="color('<%= meme.id %>')" type="submit">View Details</button>
+                        <input type="hidden" name="id" value="<%= meme.id %>">
+                        <input type="hidden" name="url" value="<%= meme.url %>">
+                        <input type="hidden" name="name" value="<%= meme.name %>">
+                        <input type="hidden" name="width" value="<%= meme.width %>">
+                        <input type="hidden" name="height" value="<%= meme.height %>">
+                      </form>
+                    </td>
                 </td>
                 <% } %>
             </tr>
@@ -40,7 +46,6 @@
       </table>
     </section>
     <%- include('./partials/scripts.ejs') %>
-    <script src="../public/js/tablerowColour.js"></script>
 </body>
 
 </html>

@@ -6,12 +6,12 @@ var logger = require('morgan');
 var passport = require('passport')
 var session = require('express-session');
 var JsonStore = require('express-session-json')(session);
+const bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var memeRouter = require('./routes/meme');
 var memesRouter = require('./routes/memes');
-var updateRouter = require('./routes/updateRowColor');
 // var highlightsRouter = require('./routes/highlights');
 
 var app = express();
@@ -31,7 +31,9 @@ function checkAuth(req, res, next) {
 
 
 app.use(logger('dev'));
+app.use(bodyParser.json());
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -50,7 +52,6 @@ app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/meme', memeRouter);
 app.use('/memes', memesRouter);
-app.use('/', updateRouter);
 
 
 
